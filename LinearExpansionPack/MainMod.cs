@@ -12,13 +12,13 @@ using UnityEngine;
 using static Il2Cpp.Interop;
 using static Il2CppSystem.Array;
 
-[assembly: MelonInfo(typeof(MainMod), "LinearExpansionPack", "2.0", "LinearPoint")]
+[assembly: MelonInfo(typeof(MainMod), "LinearExpansionPack", "2.1", "LinearPoint")]
 [assembly: MelonGame("UmiArt", "Demon Bluff")]
 
 /*
 <<Verified Bugs>>
 - Somebody can be made Mad as a character not on the script very rarely
-- Pixie still refuses to sit next to an Outcast when copying Chancellor
+- Baker interacts poorly with Mad status
 */
 
 namespace LinearExpansionPack;
@@ -36,8 +36,8 @@ public class MainMod : MelonMod
         Empath.role = new Empath();
         Empath.name = "Empath";
         Empath.description = "Learn what character closest to me is Disguised.";
-        Empath.flavorText = "\"Listens to her heart.\"";
-        Empath.hints = "";
+        Empath.flavorText = "\"Woke up one day insisting the Drunk had 'bad vibes'. She refused to elaborate further.\"";
+        Empath.hints = "Will not include themselves when checking for nearby Disguised characters.";
         Empath.ifLies = "The character learned is not the closest Disguised character to me. It may or may not be in play.";
         Empath.picking = false;
         Empath.startingAlignment = EAlignment.Good;
@@ -52,8 +52,8 @@ public class MainMod : MelonMod
         CharacterData TaxCollector = new CharacterData();
         TaxCollector.role = new TaxCollector();
         TaxCollector.name = "Tax Collector";
-        TaxCollector.description = "Learn one out of play Character. Falls for the Demon's bluff.";
-        TaxCollector.flavorText = "\"\"";
+        TaxCollector.description = "Learn one out of play Character.\nFalls for the Demon's bluff.";
+        TaxCollector.flavorText = "\"Even the Demon knows to pay on time. The minions and Drunk never seem to learn their lesson though.\"";
         TaxCollector.hints = "I will not call out the Demon's bluff as being out of play.";
         TaxCollector.ifLies = "The character learned is in play.";
         TaxCollector.picking = false;
@@ -88,8 +88,8 @@ public class MainMod : MelonMod
         Siren.role = new Siren();
         Siren.name = "Siren";
         Siren.description = "One of my neighbors is <color=#d56ce2>Mad</color>.\n\nI Lie and Disguise.";
-        Siren.flavorText = "\"She has been the recipient of several noise violations. Mostly from the Poet.\"";
-        Siren.hints = "<color=#d56ce2>Mad</color> characters will Disguise following Minion Disguising rules.\nMad characters will Lie 60% of the time if their Disguise gives information.";
+        Siren.flavorText = "\"If not for her constant molting she'd probably never have been caught by the Hunter.\"";
+        Siren.hints = "<color=#d56ce2>Mad</color> characters will still have their original abilities function properly. Not their Disguise's abilities.\n<color=#d56ce2>Mad</color> characters will Disguise following Minion Disguising rules.\n<color=#d56ce2>Mad</color> characters will Lie 60% of the time if their Disguise gives information.\nIf <color=#d56ce2>Mad</color> about the character they actually are, they will always tell the truth.";
         Siren.ifLies = "";
         Siren.picking = false;
         Siren.startingAlignment = EAlignment.Evil;
