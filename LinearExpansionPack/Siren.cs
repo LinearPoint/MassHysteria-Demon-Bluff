@@ -1,4 +1,4 @@
-﻿using Il2Cpp;
+using Il2Cpp;
 using Il2CppInterop.Runtime;
 using Il2CppInterop.Runtime.Injection;
 using Il2CppInterop.Runtime.InteropTypes;
@@ -55,6 +55,8 @@ public class Siren : Minion {
             diceRoll = Calculator.RollDice(10);
             if (diceRoll >= 7)
                 randomChar.statuses.AddStatus(ECharacterStatus.HealthyBluff, charRef);
+            if (randomChar.GetCharacterData().name == "Baker" || randomChar.GetCharacterData().name == "Slayer" || randomChar.GetCharacterData().name == "Alchemist")
+                randomChar.statuses.statuses.Remove(ECharacterStatus.HealthyBluff);
             if (randomChar.GetCharacterData().name == randomChar.GetCharacterBluffIfAble().name)
                 randomChar.statuses.AddStatus(ECharacterStatus.HealthyBluff, charRef);
         }
