@@ -33,7 +33,7 @@ public class Empath : Role {
 
         Character randomChar = disguisedChars[UnityEngine.Random.Range(0, disguisedChars.Count)];
 
-        String info = "I sense the presense of the " + randomChar.GetCharacterData().name + " nearby.";
+        String info = "I sense the presence of the " + randomChar.GetCharacterData().name + " nearby.";
 
         return new ActedInfo(info);
     }
@@ -86,7 +86,7 @@ public class Empath : Role {
 
         CharacterData randomChar = fakeDisguises[UnityEngine.Random.Range(0, fakeDisguises.Count)];
 
-        String info = "I sense the presense of the " + randomChar.name + " nearby.";
+        String info = "I sense the presence of the " + randomChar.name + " nearby.";
 
         return new ActedInfo(info);
     }
@@ -107,4 +107,5 @@ public class Empath : Role {
         ClassInjector.DerivedConstructorBody((Il2CppObjectBase)this);
     }
     public Empath(IntPtr ptr) : base(ptr) { }
+
 }
