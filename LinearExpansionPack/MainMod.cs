@@ -1,24 +1,19 @@
 global using Il2Cpp;
 using LinearExpansionPack;
 using HarmonyLib;
-using Il2CppDissolveExample;
 using Il2CppInterop.Runtime;
 using Il2CppInterop.Runtime.Injection;
-using Il2CppInterop.Runtime.InteropTypes.Arrays;
-using Il2CppSystem.IO;
 using MelonLoader;
-using System;
 using UnityEngine;
-using static Il2Cpp.Interop;
-using static Il2CppSystem.Array;
 
-[assembly: MelonInfo(typeof(MainMod), "LinearExpansionPack", "2.1", "LinearPoint")]
+[assembly: MelonInfo(typeof(MainMod), "LinearExpansionPack", "2.2", "LinearPoint")]
 [assembly: MelonGame("UmiArt", "Demon Bluff")]
 
 /*
-<<Verified Bugs>>
-- Somebody can be made Mad as a character not on the script very rarely
-- Baker interacts poorly with Mad status
+<<Known Bugs>>
+- Somebody mad as a Pixie does not add a fake Minion to the Deckview rarely (HealthyBluff not being true?)
+- Baker sometimes interacts poorly after Baking someone with the Mad status
+- Empath skipped over a Siren one time? Very difficult to reproduce.
 */
 
 namespace LinearExpansionPack;
@@ -37,7 +32,7 @@ public class MainMod : MelonMod
         Empath.name = "Empath";
         Empath.description = "Learn what character closest to me is Disguised.";
         Empath.flavorText = "\"Woke up one day insisting the Drunk had 'bad vibes'. She refused to elaborate further.\"";
-        Empath.hints = "Will not include themselves when checking for nearby Disguised characters.";
+        Empath.hints = "I am pretty sure the Wretch is a Minion in Disguise.\nI'll never check myself, but if lying might say my character is nearby.";
         Empath.ifLies = "The character learned is not the closest Disguised character to me. It may or may not be in play.";
         Empath.picking = false;
         Empath.startingAlignment = EAlignment.Good;
@@ -66,24 +61,6 @@ public class MainMod : MelonMod
         TaxCollector.cardBorderColor = new Color(0.7133f, 0.339f, 0.8679f);
         TaxCollector.color = new Color(1f, 0.935f, 0.7302f);
 
-        CharacterData Pixie = new CharacterData();
-        Pixie.role = new Pixie();
-        Pixie.name = "Pixie";
-        Pixie.description = "One random Minion is added to the Deck View.\nI have the abilities of an out of play Minion.";
-        Pixie.flavorText = "\"She insists that all of her pranks are harmless. Yes, the poison was harmless!\"";
-        Pixie.hints = "If bluffed a fake Minion is still added to the Deck View, but its abilities are not functioning.";
-        Pixie.ifLies = "";
-        Pixie.picking = false;
-        Pixie.startingAlignment = EAlignment.Good;
-        Pixie.type = ECharacterType.Outcast;
-        Pixie.bluffable = true;
-        Pixie.characterId = "Pixie_LP";
-        Pixie.artBgColor = new Color(0.3679f, 0.2014f, 0.1541f);
-        Pixie.cardBgColor = new Color(0.102f, 0.0667f, 0.0392f);
-        Pixie.cardBorderColor = new Color(0.7843f, 0.6471f, 0f);
-        Pixie.color = new Color(0.9659f, 1f, 0.4472f);
-        Characters.Instance.startGameActOrder = InsertAfterAct("Pooka", Pixie);
-
         CharacterData Siren = new CharacterData();
         Siren.role = new Siren();
         Siren.name = "Siren";
@@ -101,6 +78,25 @@ public class MainMod : MelonMod
         Siren.cardBorderColor = new Color(0.8208f, 0f, 0.0241f);
         Siren.color = new Color(0.8491f, 0.4555f, 0f);
         Characters.Instance.startGameActOrder = InsertAfterAct("Alchemist", Siren);
+
+        CharacterData Pixie = new CharacterData();
+        Pixie.role = new Pixie();
+        Pixie.name = "Pixie";
+        Pixie.description = "One random Minion is added to the Deck View.\nI have the abilities of an out of play Minion.";
+        Pixie.flavorText = "\"She insists that all of her pranks are harmless. Yes, the poison was harmless!\"";
+        Pixie.hints = "If bluffed a fake Minion is still added to the Deck View, but its abilities are not functioning.";
+        Pixie.ifLies = "";
+        Pixie.picking = false;
+        Pixie.startingAlignment = EAlignment.Good;
+        Pixie.type = ECharacterType.Outcast;
+        Pixie.bluffable = true;
+        Pixie.characterId = "Pixie_LP";
+        Pixie.artBgColor = new Color(0.3679f, 0.2014f, 0.1541f);
+        Pixie.cardBgColor = new Color(0.102f, 0.0667f, 0.0392f);
+        Pixie.cardBorderColor = new Color(0.7843f, 0.6471f, 0f);
+        Pixie.color = new Color(0.9659f, 1f, 0.4472f);
+        Characters.Instance.startGameActOrder = InsertAfterAct("Siren", Pixie);
+
 
         // Planned Demon Unnamed - All Outcasts are Mad
 
