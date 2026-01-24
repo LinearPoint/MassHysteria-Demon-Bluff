@@ -6,7 +6,7 @@ using Il2CppInterop.Runtime.Injection;
 using MelonLoader;
 using UnityEngine;
 
-[assembly: MelonInfo(typeof(MainMod), "LinearExpansionPack", "2.2", "LinearPoint")]
+[assembly: MelonInfo(typeof(MainMod), "LinearExpansionPack", "2.2.1", "LinearPoint")]
 [assembly: MelonGame("UmiArt", "Demon Bluff")]
 
 /*
@@ -61,6 +61,24 @@ public class MainMod : MelonMod
         TaxCollector.cardBorderColor = new Color(0.7133f, 0.339f, 0.8679f);
         TaxCollector.color = new Color(1f, 0.935f, 0.7302f);
 
+        CharacterData Pixie = new CharacterData();
+        Pixie.role = new Pixie();
+        Pixie.name = "Pixie";
+        Pixie.description = "One random Minion is added to the Deck View.\nI have the abilities of an out of play Minion.";
+        Pixie.flavorText = "\"She insists that all of her pranks are harmless. Yes, the poison was harmless!\"";
+        Pixie.hints = "If bluffed a fake Minion is still added to the Deck View, but its abilities are not functioning.";
+        Pixie.ifLies = "";
+        Pixie.picking = false;
+        Pixie.startingAlignment = EAlignment.Good;
+        Pixie.type = ECharacterType.Outcast;
+        Pixie.bluffable = true;
+        Pixie.characterId = "Pixie_LP";
+        Pixie.artBgColor = new Color(0.3679f, 0.2014f, 0.1541f);
+        Pixie.cardBgColor = new Color(0.102f, 0.0667f, 0.0392f);
+        Pixie.cardBorderColor = new Color(0.7843f, 0.6471f, 0f);
+        Pixie.color = new Color(0.9659f, 1f, 0.4472f);
+        Characters.Instance.startGameActOrder = InsertAfterAct("Pooka", Pixie);
+
         CharacterData Siren = new CharacterData();
         Siren.role = new Siren();
         Siren.name = "Siren";
@@ -78,24 +96,6 @@ public class MainMod : MelonMod
         Siren.cardBorderColor = new Color(0.8208f, 0f, 0.0241f);
         Siren.color = new Color(0.8491f, 0.4555f, 0f);
         Characters.Instance.startGameActOrder = InsertAfterAct("Alchemist", Siren);
-
-        CharacterData Pixie = new CharacterData();
-        Pixie.role = new Pixie();
-        Pixie.name = "Pixie";
-        Pixie.description = "One random Minion is added to the Deck View.\nI have the abilities of an out of play Minion.";
-        Pixie.flavorText = "\"She insists that all of her pranks are harmless. Yes, the poison was harmless!\"";
-        Pixie.hints = "If bluffed a fake Minion is still added to the Deck View, but its abilities are not functioning.";
-        Pixie.ifLies = "";
-        Pixie.picking = false;
-        Pixie.startingAlignment = EAlignment.Good;
-        Pixie.type = ECharacterType.Outcast;
-        Pixie.bluffable = true;
-        Pixie.characterId = "Pixie_LP";
-        Pixie.artBgColor = new Color(0.3679f, 0.2014f, 0.1541f);
-        Pixie.cardBgColor = new Color(0.102f, 0.0667f, 0.0392f);
-        Pixie.cardBorderColor = new Color(0.7843f, 0.6471f, 0f);
-        Pixie.color = new Color(0.9659f, 1f, 0.4472f);
-        Characters.Instance.startGameActOrder = InsertAfterAct("Siren", Pixie);
 
 
         // Planned Demon Unnamed - All Outcasts are Mad
