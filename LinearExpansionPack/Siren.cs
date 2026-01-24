@@ -1,14 +1,6 @@
-using Il2Cpp;
-using Il2CppInterop.Runtime;
 using Il2CppInterop.Runtime.Injection;
 using Il2CppInterop.Runtime.InteropTypes;
 using MelonLoader;
-using HarmonyLib;
-using System;
-using System.Linq;
-using System.Reflection;
-using UnityEngine;
-using System.ComponentModel;
 
 namespace LinearExpansionPack;
 
@@ -44,8 +36,10 @@ public class Siren : Minion {
             int diceRoll = Calculator.RollDice(10);
             if (diceRoll <= 6)
                 bluff = Characters.Instance.GetRandomDuplicateBluff();                
-            else
-             bluff = Characters.Instance.GetRandomUniqueBluff(); 
+            else {
+                bluff = Characters.Instance.GetRandomUniqueBluff();
+                Gameplay.Instance.AddScriptCharacterIfAble(bluff.type, bluff);
+            }
 
             randomChar.GiveBluff(bluff);
             randomChar.statuses.AddStatus(LinearStatic.mad, charRef);
@@ -59,6 +53,10 @@ public class Siren : Minion {
                 randomChar.statuses.statuses.Remove(ECharacterStatus.HealthyBluff);
             if (randomChar.GetCharacterData().name == randomChar.GetCharacterBluffIfAble().name)
                 randomChar.statuses.AddStatus(ECharacterStatus.HealthyBluff, charRef);
+            if (randomChar.GetCharacterData().name == "Drunk") {
+                randomChar.statuses.AddStatus(ECharacterStatus.Corrupted, randomChar);
+                randomChar.statuses.statuses.Remove(ECharacterStatus.HealthyBluff);
+            }
         }
     }
     public Siren() : base(ClassInjector.DerivedConstructorPointer<Siren>()) {
