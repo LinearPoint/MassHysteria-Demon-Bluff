@@ -1,13 +1,6 @@
-﻿using Il2Cpp;
-using Il2CppInterop.Runtime;
 using Il2CppInterop.Runtime.Injection;
 using Il2CppInterop.Runtime.InteropTypes;
 using MelonLoader;
-using HarmonyLib;
-using System;
-using System.Linq;
-using System.Reflection;
-using UnityEngine;
 
 namespace LinearExpansionPack;
 
@@ -74,4 +67,5 @@ public class TaxCollector : Role {
         ClassInjector.DerivedConstructorBody((Il2CppObjectBase)this);
     }
     public TaxCollector(IntPtr ptr) : base(ptr) { }
+
 }
