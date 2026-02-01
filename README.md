@@ -1,4 +1,4 @@
-# LinearExpansionPack
+# MassHysteira
 Adds a collection of roles by LinearPoint to the game Demon Bluff by UmiArt.
 The roles are based around the central mechanic of Madness, loosely based on the similarly named mechanic from the social deduction game Blood on the Clocktower. They might be lying about who they are but are trying their best to help.
 
@@ -22,3 +22,4 @@ Mad characters will disguise as either a villager or outcast. The exact disguisi
 <li>***Siren (Minion)*** - Makes one of their good neighbors mad using minion disguising rules.</li>
 <li>***Cakler (Demon)*** - The Cakler and all outcasts become mad as in-play villagers. Be careful; unlike other demons, the Cakler tries to get into double claims to seem like they are an outcast.</li>
 </ul>
+
