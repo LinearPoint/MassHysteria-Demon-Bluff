@@ -1,4 +1,4 @@
-﻿using Il2CppInterop.Runtime.Injection;
+using Il2CppInterop.Runtime.Injection;
 using Il2CppInterop.Runtime.InteropTypes;
 using MelonLoader;
 
@@ -15,26 +15,17 @@ public class Empath : Role {
         Il2CppSystem.Collections.Generic.List<Character> disguisedChars = new Il2CppSystem.Collections.Generic.List<Character>();
 
         for (int i = 0; i < sortedChars.Count / 2; i++) {
-            MelonLogger.Msg("Checking " + sortedChars[i].GetCharacterData().name + " and " + sortedChars[^(i + 1)].GetCharacterData().name);
-            if (sortedChars[i].bluff && !disguisedChars.Contains(sortedChars[i])){
+            if (sortedChars[i].bluff && !disguisedChars.Contains(sortedChars[i]))
                 disguisedChars.Add(sortedChars[i]);
-                MelonLogger.Msg("Added " + sortedChars[i].GetCharacterData().name + " to disguisedChars");
-            }
-            if (sortedChars[^(i + 1)].bluff && !disguisedChars.Contains(sortedChars[^(i + 1)])){
+            if (sortedChars[^(i + 1)].bluff && !disguisedChars.Contains(sortedChars[^(i + 1)]))
                 disguisedChars.Add(sortedChars[^(i + 1)]);
-                MelonLogger.Msg("Added " + sortedChars[^(i + 1)].GetCharacterData().name + " to disguisedChars");
-            }
-            MelonLogger.Msg("disguisedChars count: " + disguisedChars.Count);
             if (disguisedChars.Count >= 1)
                 break;
         }
         if (disguisedChars.Count is 0 && sortedChars.Count % 2 is 1) {
             Character midChar = sortedChars[sortedChars.Count / 2];
-            MelonLogger.Msg("Checking " + sortedChars[sortedChars.Count / 2].GetCharacterData().name);
-            if (midChar.bluff) {
+            if (midChar.bluff)
                 disguisedChars.Add(midChar);
-                MelonLogger.Msg("Added " + midChar.GetCharacterData().name + " to disguisedChars");
-            }
         }
         if (disguisedChars.Count == 0)
             return new ActedInfo("I cannot sense any pretenders in this town.");
@@ -55,26 +46,17 @@ public class Empath : Role {
         Il2CppSystem.Collections.Generic.List<Character> disguisedChars = new Il2CppSystem.Collections.Generic.List<Character>();
 
         for (int i = 0; i < sortedChars.Count / 2; i++) {
-            MelonLogger.Msg("Checking " + sortedChars[i].GetCharacterData().name + " and " + sortedChars[^(i + 1)].GetCharacterData().name);
-            if (sortedChars[i].bluff && !disguisedChars.Contains(sortedChars[i])){
+            if (sortedChars[i].bluff && !disguisedChars.Contains(sortedChars[i]))
                 disguisedChars.Add(sortedChars[i]);
-                MelonLogger.Msg("Added " + sortedChars[i].GetCharacterData().name + " to disguisedChars");
-            }
-            if (sortedChars[^(i + 1)].bluff && !disguisedChars.Contains(sortedChars[^(i + 1)])){
+            if (sortedChars[^(i + 1)].bluff && !disguisedChars.Contains(sortedChars[^(i + 1)]))
                 disguisedChars.Add(sortedChars[^(i + 1)]);
-                MelonLogger.Msg("Added " + sortedChars[^(i + 1)].GetCharacterData().name + " to disguisedChars");
-            }
-            MelonLogger.Msg("disguisedChars count: " + disguisedChars.Count);
             if (disguisedChars.Count >= 1)
                 break;
         }
         if (disguisedChars.Count is 0 && sortedChars.Count % 2 is 1) {
             Character midChar = sortedChars[sortedChars.Count / 2];
-            MelonLogger.Msg("Checking " + sortedChars[sortedChars.Count / 2].GetCharacterData().name);
-            if (midChar.bluff) {
+            if (midChar.bluff)
                 disguisedChars.Add(midChar);
-                MelonLogger.Msg("Added " + midChar.GetCharacterData().name + " to disguisedChars");
-            }
         }
 
         Il2CppSystem.Collections.Generic.List<CharacterData> scriptChars = gameplay.GetScriptCharacters();
