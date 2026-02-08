@@ -1,4 +1,4 @@
-﻿using Il2CppInterop.Runtime.Injection;
+using Il2CppInterop.Runtime.Injection;
 using Il2CppInterop.Runtime.InteropTypes;
 using MelonLoader;
 
@@ -73,9 +73,16 @@ public class Actor : Role {
             madRole = target.bluff;
         } else {
             if (!target.bluff)
-                madRole = target.GetCharacterData();
+                madRole = target.dataRef;
             else
                 madRole = target.bluff;
+        }
+
+        if (madRole.bluffable == false) {
+            checkedOuted = true;
+            onActed?.Invoke(GetInfo(charRef));
+            charRef.RefreshCharacter();
+            return;
         }
         
         chRef.GiveBluff(madRole);
@@ -114,6 +121,13 @@ public class Actor : Role {
             madRole = target.GetCharacterData();
         else
             madRole = target.bluff;
+        
+        if (madRole.bluffable == false) {
+            checkedOuted = true;
+            onActed?.Invoke(GetInfo(charRef));
+            charRef.RefreshCharacter();
+            return;
+        }
 
         chRef.GiveBluff(madRole);
         if (amICorrupted && !chRef.statuses.Contains(ECharacterStatus.Corrupted))
