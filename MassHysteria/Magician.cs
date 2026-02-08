@@ -1,4 +1,4 @@
-﻿using Il2CppInterop.Runtime.Injection;
+using Il2CppInterop.Runtime.Injection;
 using Il2CppInterop.Runtime.InteropTypes;
 using MelonLoader;
 
@@ -58,8 +58,10 @@ public class Magician : Role {
             villagers2.Add(range3[1]);
             villagers1 = instance.FilterCharacterMissingStatus(villagers1, MadnessStatic.mad);
             villagers1 = instance.FilterRealCharacterType(villagers1, ECharacterType.Villager);
+            villagers1 = instance.FilterBluffableCharacters(villagers1);
             villagers2 = instance.FilterCharacterMissingStatus(villagers2, MadnessStatic.mad);
             villagers2 = instance.FilterRealCharacterType(villagers2, ECharacterType.Villager);
+            villagers2 = instance.FilterBluffableCharacters(villagers2);
 
             if (villagers1.Count <= 0) {
                 charRef.statuses.AddStatus(ECharacterStatus.Corrupted, charRef);
@@ -78,8 +80,8 @@ public class Magician : Role {
                 safetyCheck = true;
             } while (!safetyCheck);
 
-            CharacterData bluff1 = randomVill1.GetCharacterData();
-            CharacterData bluff2 = randomVill2.GetCharacterData();
+            CharacterData bluff1 = randomVill1.dataRef;
+            CharacterData bluff2 = randomVill2.dataRef;
             randomVill1.GiveBluff(bluff2);
             randomVill2.GiveBluff(bluff1);
             randomVill1.statuses.AddStatus(MadnessStatic.mad, charRef);
