@@ -1,7 +1,8 @@
-﻿using Il2CppInterop.Runtime.Injection;
+using Il2CppInterop.Runtime.Injection;
 using Il2CppInterop.Runtime.InteropTypes;
 using MelonLoader;
 using HarmonyLib;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MassHysteria;
 
@@ -29,8 +30,12 @@ public class Pixie : Role {
             Il2CppSystem.Collections.Generic.List<CharacterData> listFin = new Il2CppSystem.Collections.Generic.List<CharacterData>();
 
             for (int i = 0; i < chars.Count; i++) {
+                // Vanilla Whitelist
                 if (chars[i].characterId is not ("Minion_71804875" or "Twin Minion_15695218" or "Baron_04539999"))
                     listFin.Add(chars[i]);
+                // Wingidon's Mod Blacklist
+                if (chars[i].characterId is "Swarm_Good_WING" or "Acolyte_WING" or "Undying_WING" or "Swarm_Evil_WING" or "Professional_WING" or "Turncoat_WING")
+                    listFin.Remove(chars[i]);
             }
             if (listFin == null || listFin.Count == 0)
                 return;
@@ -38,12 +43,20 @@ public class Pixie : Role {
             fakeMinion = listFin[UnityEngine.Random.RandomRangeInt(0, listFin.Count)];
             gameplay.AddScriptCharacter(ECharacterType.Minion, fakeMinion);
         }
-        if (charRef.GetCharacterData().name == "Pixie")
-            fakeMinion.role.Act(trigger, charRef);
+        if (charRef.GetCharacterData().name == "Pixie") {
+            //if (trigger != ETriggerPhase.Day)
+                fakeMinion.role.Act(trigger, charRef);
+            //else onActed?.Invoke(fakeMinion.role.GetInfo(charRef));
+        }
+    }
+    public override bool CheckIfCanBeKilled(Character charRef)
+    {
+        return fakeMinion.role.CheckIfCanBeKilled(charRef);
     }
     public override void ActOnDied(Character charRef) {
-        if (charRef.GetCharacterData().name == "Pixie")
+        if (charRef.GetCharacterData().name == "Pixie") {
             fakeMinion.role.ActOnDied(charRef);
+            }
     }
     public static CharacterData GetGenericMinion() {
         AscensionsData allCharactersAscension = ProjectContext.Instance.gameData.allCharactersAscension;
@@ -67,7 +80,7 @@ public static class PixieRole {
         }
     }
 
-    [HarmonyPatch(typeof(Baron), nameof(Baron.SitNextToOutsider))]
+    /*[HarmonyPatch(typeof(Baron), nameof(Baron.SitNextToOutsider))]
     public static class snto{
         public static void Postfix(Baron __instance, Character charRef){
             if (charRef.GetCharacterData().name == "Pixie"){
@@ -85,5 +98,5 @@ public static class PixieRole {
                 charRef.Init(pickedData);
             }
         }
-    }
+    }*/
 }
