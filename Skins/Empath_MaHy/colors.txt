@@ -1,0 +1,4 @@
+color FFEEBAFF
+cardBgColor 422757FF
+cardBorderColor B656DDFF
+artBgColor 1C1524FF
